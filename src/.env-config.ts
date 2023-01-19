@@ -1,0 +1,1 @@
+const API_HOST_LOCAL = "http://localhost:5236";

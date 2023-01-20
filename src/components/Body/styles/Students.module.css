@@ -1,0 +1,16 @@
+.flexContainer {
+    display: flex;
+    margin-top: 20px;
+}
+
+.dropbox {
+    flex: 3;
+    /* width: 30%; */
+    margin-right: 400px;
+    margin-left: 30px;
+    background-color: white;
+}  
+
+.addIcon{
+    margin-right: 30px;
+}

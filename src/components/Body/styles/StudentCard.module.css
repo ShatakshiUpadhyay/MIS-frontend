@@ -1,0 +1,12 @@
+.parent{
+    padding: 20px;
+    display: flex;
+}
+
+.leftChild{
+ margin-right: 20%;
+}
+
+.rightChild{
+
+}

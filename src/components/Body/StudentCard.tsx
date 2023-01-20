@@ -10,47 +10,42 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { useNavigate } from "react-router-dom";
 import classes from "./styles/StudentCard.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Checkbox } from "@mui/material";
 
-export default function StudentCard(prop: any) {
+export default function StudentCard(prop :any) {
   const navigate = useNavigate();
   const editPage = () => {
     console.log("edit page");
     return navigate("/edit");
   };
-
-  useEffect(() => {}, []);
-
+  const [studentDetails, setStudent] = useState<any>(prop.student); 
+  
   const card = (
     <React.Fragment>
       <CardContent className={classes.parent}>
         <div>
-          <div>
-            <CheckBoxIcon></CheckBoxIcon>
-          </div>
-          <div>
-            <CheckBoxOutlineBlankIcon></CheckBoxOutlineBlankIcon>
-          </div>
+        <Checkbox/>
         </div>
         <div className={classes.leftChild}>
           <Typography variant="h5" component="div">
-            First Name :
+          {studentDetails.firstName}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            MiddleName:
+          {studentDetails.middleName}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Last Name:
+          {studentDetails.lastName}
           </Typography>
         </div>
 
         <div className={classes.rightChild}>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Date of Birth :
+            Date of Birth: {studentDetails.dateOfBirth.slice(0,10)}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Favourite Subject :
+            Favourite Subject: {studentDetails.subject.name}
           </Typography>
         </div>
         <div className={classes.card}>
@@ -75,10 +70,10 @@ export default function StudentCard(prop: any) {
       marginRight="10%"
       marginTop="5%"
     >
+    <div></div>
       <Card>{card}</Card>
       <br />
       <br />
-      <Card variant="outlined">{card}</Card>
     </Box>
   );
 }

@@ -37,18 +37,18 @@ export default function StudentCard(prop: any) {
         <Typography sx={{ mb: 1.5 }} color='text.secondary'>
           Last Name
         </Typography>
-        <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
+        <Typography sx={{ fontSize: 18 }} color='text.secondary' gutterBottom>
           Favourite Subject:
         </Typography>
         <div className='card' >
           <CardActions>
             <div onClick={() => editPage()}>
-              <EditIcon>Edit</EditIcon>
+              <EditIcon className='button'>Edit</EditIcon>
             </div>
           </CardActions>
           <CardActions>
             <div>
-              <DeleteIcon></DeleteIcon>
+              <DeleteIcon className='button'></DeleteIcon>
             </div>
           </CardActions>
         </div>

@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import React from 'react'
-import EditStudent from '../Body/EditStudent'
-import Students from '../Body/Students'
-import AddNewStudent from '../Body/AddNewStudent'
+import Students from '../body/Students'
+import AddNewStudent from '../body/AddNewStudent'
+import EditStudent from '../body/EditStudent'
 
 function RootRouter() {
   return (

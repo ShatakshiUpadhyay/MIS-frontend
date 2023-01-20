@@ -37,14 +37,3 @@
   }
 }
 
-.card{
-  display: flex;
-  float: right;
-}
-.button:hover {
-  background-color: #818681; /* Green */
-  color: white;
-  border-radius: 50%;
-  padding: 20%;
-  opacity: 0.4;
-}

@@ -1,0 +1,26 @@
+.parent{
+    padding: 20px;
+    display: flex;
+}
+
+.leftChild{
+ margin-left: 15%;
+ flex-grow: 5;
+}
+
+.rightChild{
+    flex-grow: 5;
+}
+.card{
+    display: flex;
+    flex-grow: 2;
+
+  }
+.button:hover {
+    background-color: #818681; /* Green */
+    color: white;
+    border-radius: 50%;
+    padding: 20%;
+    opacity: 0.4;
+    float: right;
+  }

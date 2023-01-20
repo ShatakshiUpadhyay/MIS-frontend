@@ -10,7 +10,7 @@ function RootRouter() {
       <Routes>
         <Route path='/' element={<Students />} />
         <Route path='/edit' element={<EditStudent />} />
-        <Route path='/add' element={<AddNewStudent />} />
+        {/* <Route path='/add' element={<AddNewStudent />} /> */}
       </Routes>
     </Router>
   )

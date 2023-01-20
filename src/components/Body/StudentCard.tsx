@@ -8,10 +8,10 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import EditStudent from "./EditStudent";
 import { useNavigate } from "react-router-dom";
 import classes from "./styles/StudentCard.module.css";
 import { useEffect } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function StudentCard(prop: any) {
   const navigate = useNavigate();
@@ -20,19 +20,19 @@ export default function StudentCard(prop: any) {
     return navigate("/edit");
   };
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const card = (
     <React.Fragment>
-      <div>
-        <CheckBoxIcon></CheckBoxIcon>
-      </div>
-      <div>
-        <CheckBoxOutlineBlankIcon></CheckBoxOutlineBlankIcon>
-      </div>
       <CardContent className={classes.parent}>
+        <div>
+          <div>
+            <CheckBoxIcon></CheckBoxIcon>
+          </div>
+          <div>
+            <CheckBoxOutlineBlankIcon></CheckBoxOutlineBlankIcon>
+          </div>
+        </div>
         <div className={classes.leftChild}>
           <Typography variant="h5" component="div">
             First Name :
@@ -52,11 +52,16 @@ export default function StudentCard(prop: any) {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Favourite Subject :
           </Typography>
-
+        </div>
+        <div className={classes.card}>
           <CardActions>
             <div onClick={() => editPage()}>
-              
-              <EditIcon id="edit">Edit</EditIcon>
+              <EditIcon className={classes.button}>Edit</EditIcon>
+            </div>
+          </CardActions>
+          <CardActions>
+            <div>
+              <DeleteIcon className={classes.button}></DeleteIcon>
             </div>
           </CardActions>
         </div>

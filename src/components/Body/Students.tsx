@@ -1,42 +1,27 @@
-import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StudentCard from "./StudentCard";
 import classes from './styles/Students.module.css';
+import SubHeader from "./SubHeader"
+import { API_HOST_LOCAL } from "../../env-config";
 
 function Students() {
-  const navigate = useNavigate();
-  const addPage = () => {
-    return navigate("/add");
-  };
+
+  const [students, SetStudents] = useState<any>([]);
+
+  async function fetchStudents(){
+    const results = await axios.get(`${API_HOST_LOCAL}/Student/GetAll`)
+    console.log(results)
+  }
+
+  useEffect(()=>{
+    fetchStudents();
+  },[])
+ 
   return (
     <>
-      <div className={classes.flexContainer}>
-        <div
-          className={classes.dropbox}
-        >
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Favourite Subject
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              // value={age}
-              label="Age"
-              // onChange={handleChange}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className={classes.addIcon} onClick={addPage}>
-          <PersonAddAlt1Icon style={{width : "50", height: "50"}}></PersonAddAlt1Icon>
-        </div>
-      </div>
+      <SubHeader/>
       <StudentCard />
     </>
   );

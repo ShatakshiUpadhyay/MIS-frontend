@@ -6,8 +6,6 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { useNavigate } from "react-router-dom";
 import classes from "./styles/StudentCard.module.css";
 import { useEffect, useState } from "react";
@@ -16,11 +14,12 @@ import { Checkbox } from "@mui/material";
 
 export default function StudentCard(prop :any) {
   const navigate = useNavigate();
-  const editPage = () => {
-    console.log("edit page");
-    return navigate("/edit");
-  };
   const [studentDetails, setStudent] = useState<any>(prop.student); 
+
+  const editPage = () => {
+    const student = prop.student
+    return navigate("/edit", {state:{student:student}});
+  };
   
   const card = (
     <React.Fragment>

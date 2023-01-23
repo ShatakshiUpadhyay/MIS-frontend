@@ -1,27 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Formik,
-  FormikHelpers,
-  FormikProps,
   Form,
-  Field,
-  FieldProps,
 } from 'formik'
 import { Button, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import classes from './styles/StudentCard.module.css'
-import { DesktopDatePicker } from '@mui/x-date-pickers'
+import { useLocation } from 'react-router-dom'
+import SubjectDropDown from './SubjectDropDown'
 
-function EditStudent() {
-  const currentStudent: Object = {
-    firstName: 'shatakshi',
-    middleName: '',
-    lastName: '',
-    DOB: '',
-    FavouriteSubject: '',
+function EditStudent(prop:any) {
+    const location = useLocation();
+    const student = location.state.student;
+    
+  const currentStudent: any = {
+    firstName: student.firstName,
+    middleName: student.middleName,
+    lastName: student.lastName,
+    dateOfBirth: student.dateOfBirth,
+    favouriteSubject: student.subject.name,
   }
+  useEffect(()=>{
+    
+},[])
 
   return (
+    
     <Box className={classes.box}>
       <Typography variant="h3" component="div">
           Edit This Student
@@ -41,6 +45,7 @@ function EditStudent() {
             className={classes.content}
             name='firstName'
             placeholder='First Name'
+            value={currentStudent.firstName}
           />
           <br />
           <TextField
@@ -48,6 +53,7 @@ function EditStudent() {
             className={classes.content}
             name='lastName'
             placeholder='Last Name'
+            value={currentStudent.lastName}
           />
           <br />
           <TextField
@@ -55,36 +61,37 @@ function EditStudent() {
             className={classes.content}
             name='middleName'
             placeholder='Middle Name'
+            value={currentStudent.middleName}
           />
           <br />
           <TextField
             id='date'
-            label='Birthday'
-            type='date'
-            InputLabelProps={{
-              shrink: true,
-            }}
+            className={classes.content}
+            name='dateOfBirth'
+            placeholder='Date of Birth'
+            value={currentStudent.dateOfBirth.slice(0,10)}
           />
           <br />
-          <InputLabel id="demo-simple-select-label">
+          {/* <InputLabel id="demo-simple-select-label">
             Favourite Subject
           </InputLabel>
           <Select
             labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            // value={age}
-            label="favouriteSaubject"
-            // onChange={handleChange}
+            id="favouriteSubject"
+            label="favouriteSubject"
             placeholder='Favourite Subject'
+            defaultValue={currentStudent.favouriteSubject}
           >
             <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={currentStudent.favouriteSubject}>{currentStudent.favouriteSubject}</MenuItem>
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+          </Select> */}
+          <SubjectDropDown favSubject={currentStudent.favouriteSubject}/>
           <br></br>
           <Button variant='contained' className={classes.content} type='submit'>
-            Submit
+            Edit
           </Button>
         </Form>
       </Formik>

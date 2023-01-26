@@ -11,37 +11,59 @@ import classes from "./styles/StudentCard.module.css";
 import { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Checkbox } from "@mui/material";
+import { API_HOST_LOCAL } from "../../env-config";
+import axios from "axios";
 
-export default function StudentCard(prop :any) {
+export default function StudentCard(prop: any) {
   const navigate = useNavigate();
-  const [studentDetails, setStudent] = useState<any>(prop.student); 
+  const [studentDetails, setStudent] = useState<any>(prop.student);
 
   const editPage = () => {
-    const student = prop.student
-    return navigate("/edit", {state:{student:student}});
+    const student = prop.student;
+    return navigate("/edit", { state: { student: student } });
+  };
+
+  const handleChange = (e: any) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      prop.addSelected(studentDetails.id);
+    } else {
+      prop.removeSelected(studentDetails.id);
+    }
   };
   
+  async function handleDelete(e: any) {
+      const result = await axios.delete(
+        `${API_HOST_LOCAL}/Student/DeleteSingle/`+ studentDetails.id);
+      console.log(result);
+      if (result.status !== 200) {
+        window.alert("Students could not be deleted");
+      }
+    
+  };
+
   const card = (
     <React.Fragment>
       <CardContent className={classes.parent}>
         <div>
-        <Checkbox/>
+          <Checkbox onChange={handleChange} />
         </div>
         <div className={classes.leftChild}>
           <Typography variant="h5" component="div">
-          {studentDetails.firstName}
+            {studentDetails.firstName}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {studentDetails.middleName}
+            {studentDetails.middleName}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {studentDetails.lastName}
+            {studentDetails.lastName}
           </Typography>
         </div>
 
         <div className={classes.rightChild}>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Date of Birth: {studentDetails.dateOfBirth.slice(0,10)}
+            Date of Birth: {studentDetails.dateOfBirth.slice(0, 10)}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Favourite Subject: {studentDetails.subject.name}
@@ -55,7 +77,10 @@ export default function StudentCard(prop :any) {
           </CardActions>
           <CardActions>
             <div>
-              <DeleteIcon className={classes.button}></DeleteIcon>
+              <DeleteIcon
+                className={classes.button}
+                onClick={handleDelete}
+              ></DeleteIcon>
             </div>
           </CardActions>
         </div>
@@ -69,7 +94,7 @@ export default function StudentCard(prop :any) {
       marginRight="10%"
       marginTop="5%"
     >
-    <div></div>
+      <div></div>
       <Card>{card}</Card>
       <br />
       <br />

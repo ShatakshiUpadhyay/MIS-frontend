@@ -36,11 +36,10 @@ export default function StudentCard(prop: any) {
   async function handleDelete(e: any) {
       const result = await axios.delete(
         `${API_HOST_LOCAL}/Student/DeleteSingle/`+ studentDetails.id);
-      console.log(result);
       if (result.status !== 200) {
         window.alert("Students could not be deleted");
       }
-    
+      prop.fetch();
   };
 
   const card = (

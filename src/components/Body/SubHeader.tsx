@@ -16,15 +16,18 @@ import SubjectDropDown from "./SubjectDropDown";
 function SubHeader(prop: any) {
   const navigate = useNavigate();
 
-  const addPage = () => {
+  function addPage() {
     return navigate("/add");
   };
+  function filterStudents(e:any){
+    prop.filterBySubject(e.target.value.subjectId);
+  }
 
   return (
     <div className={classes.flexContainer}>
       <div className={classes.dropbox}>
         <FormControl fullWidth style={{ width: "500px" }}>
-          <SubjectDropDown />
+          <SubjectDropDown onChange = {filterStudents} selected={false}/>
         </FormControl>
       </div>
       <div>

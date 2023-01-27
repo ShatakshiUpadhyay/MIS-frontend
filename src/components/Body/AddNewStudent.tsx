@@ -15,9 +15,10 @@ import SubjectDropDown from "./SubjectDropDown";
 import axios from "axios";
 import { API_HOST_LOCAL } from "../../env-config";
 import FormikForm from "./FormikForm";
+import { useNavigate } from "react-router-dom";
 
 function AddNewStudent() {
-
+  const navigate = useNavigate();
   const initialValues = {
     firstName: "",
     middleName: "",
@@ -33,10 +34,10 @@ function AddNewStudent() {
       dateOfBirth: values.dateOfBirth,
       subjectId: values.favouriteSubject.subjectId,
     };
-    console.log("******",payload);
     await axios.post(`${API_HOST_LOCAL}/Student/Post`, payload).then(
       res => {
-        console.log(res.data);
+        window.alert("Student added successfully");
+        navigate("/");
       }
     );
 

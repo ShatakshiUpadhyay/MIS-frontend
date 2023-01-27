@@ -61,6 +61,7 @@ function FormikForm(props : any) {
             onChange={prop.handleChange}
             value={prop.values.favouriteSubject}
             name="favouriteSubject"
+            selected={true}
 
           />
           <br></br>

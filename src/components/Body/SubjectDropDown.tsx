@@ -27,8 +27,13 @@ function SubjectDropDown(prop: any) {
         onChange={prop.onChange}
         name={prop.name}
         style={{ width: "100%" }}
-        
+        onSelect={prop.processStudent}
       >
+        {
+          (prop.selected)?
+          <MenuItem key={prop.value.subjectId} value={prop.value} selected={true}>{prop.value.name}
+          </MenuItem>:<div></div>
+        }
         {subjects.map((subject: any, index: number) => {
           return (
             <MenuItem key={index} value={subject}>

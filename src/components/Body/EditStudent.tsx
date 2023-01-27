@@ -31,10 +31,8 @@ function EditStudent(prop:any) {
       dateOfBirth: values.dateOfBirth,
       subjectId: values.favouriteSubject.subjectId,
     };
-    console.log("******",payload);
     await axios.put(`${API_HOST_LOCAL}/Student/Update?Id=` + student.id, payload).then(
       res => {
-        console.log(res.data);
         alert("Student updated successfully")
         navigate(-1);
       }

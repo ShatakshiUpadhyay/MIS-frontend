@@ -9,11 +9,12 @@ import StudentCard from "./StudentCard";
 function Students() {
   const [students, setStudents] = useState<any>([]);
   const [selectedStudents, setSelectedStudents] = useState<any>([]);
+  const [mapStudents , setMapStudents] = useState<any>(students)
 
   async function fetchStudents() {
     const results = await axios.get(`${API_HOST_LOCAL}/Student/GetAll`);
-    // console.log(results.data)
     setStudents(results.data);
+    setMapStudents(results.data)
   }
 
   async function deleteSelected() {
@@ -21,12 +22,11 @@ function Students() {
     if (selectedStudents.length === 0) {
       window.alert("No students selected");
     } else {
-      console.log(selectedStudents.toString());
       const results = await axios.delete(`${API_HOST_LOCAL}/Student/DeleteMultiple?Ids=` + selectedStudents.toString() )
       if(results.status !== 200){
         window.alert("Students could not be deleted");
       }
-      setStudents([]);
+      fetchStudents();
     }
   }
 
@@ -37,22 +37,29 @@ function Students() {
     let fliteredList = selectedStudents.filter((item : any) => item !== id)
     setSelectedStudents(fliteredList);
   }
+  function filterBySubject(subjectId:any){
+    let filteredStudents = students.filter((item:any)=>item.subjectId===subjectId)
+    setMapStudents(filteredStudents);
+    // console.log("&&&&&&&&",filteredStudents)
+    // console.log(students) 
+  }
 
   useEffect(() => {
     fetchStudents();
-  }, [students]);
+  }, []);
 
   return (
     <>
-      <SubHeader deleteSelected={deleteSelected} selectedStudentsLength={selectedStudents.length}/>
+      <SubHeader deleteSelected={deleteSelected} selectedStudentsLength={selectedStudents.length} filterBySubject={filterBySubject}/>
       { 
-        students.length ? students.map((student: any) => {
+        students.length ? mapStudents.map((student: any) => {
         return (
           <StudentCard
             key={student.id}
             student={student}
             addSelected={addSelected}
             removeSelected={removeSelected}
+            fetch = {fetchStudents}
           />
         );
          
